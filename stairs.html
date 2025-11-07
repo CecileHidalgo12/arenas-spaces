@@ -820,6 +820,7 @@
   </div>
 </div>
 
+
 <script>
     document.querySelector("form")?.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -1252,51 +1253,5 @@ document.querySelectorAll('.pin').forEach(pin => {
 
 
 </script>
-</body>
-</html>
-('aria-hidden', 'true');
-
-&nbsp;   document.body.style.overflow = '';
-
-&nbsp; });
-
-
-
-&nbsp; // close when clicking backdrop
-
-&nbsp; popupOverlay.addEventListener('click', (e) => {
-
-&nbsp;   if (e.target === popupOverlay) {
-
-&nbsp;     popupOverlay.style.display = 'none';
-
-&nbsp;     popupOverlay.setAttribute('aria-hidden', 'true');
-
-&nbsp;     document.body.style.overflow = '';
-
-&nbsp;   }
-
-&nbsp; });
-
-
-
-&nbsp; // close with Escape
-
-&nbsp; document.addEventListener('keydown', (e) => {
-
-&nbsp;   if (e.key === 'Escape' \&\& popupOverlay.style.display === 'flex') {
-
-&nbsp;     popupOverlay.style.display = 'none';
-
-&nbsp;     popupOverlay.setAttribute('aria-hidden', 'true');
-
-&nbsp;     document.body.style.overflow = '';
-
-&nbsp;   }
-
-&nbsp; });
-
-});
-
 </body>
 </html>
