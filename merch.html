@@ -635,7 +635,6 @@
     <img id="popupImg" src="" alt="Full View">
   </div>
 </div>
-
 <script>
     document.querySelector("form")?.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -961,6 +960,40 @@ formModal.addEventListener('click',ev=>{if(ev.target===formModal)closeForm.click
 
 // --- Navigation between selected pages ---
 document.getElementById("nextBtn").addEventListener("click", () => {
+  // Load answered pin data from localStorage
+  const answeredPins = JSON.parse(localStorage.getItem("answeredPins") || "[]");
+
+  // ✅ If none answered, block navigation
+  if (answeredPins.length === 0) {
+    // If warning doesn’t exist, create one dynamically
+    let warning = document.getElementById("nextWarning");
+    if (!warning) {
+      warning = document.createElement("div");
+      warning.id = "nextWarning";
+      warning.style.position = "fixed";
+      warning.style.bottom = "20px";
+      warning.style.left = "50%";
+      warning.style.transform = "translateX(-50%)";
+      warning.style.background = "rgba(255, 0, 0, 0.9)";
+      warning.style.color = "white";
+      warning.style.padding = "12px 18px";
+      warning.style.borderRadius = "8px";
+      warning.style.fontSize = "16px";
+      warning.style.boxShadow = "0 2px 10px rgba(0,0,0,0.3)";
+      warning.style.zIndex = "9999";
+      warning.style.textAlign = "center";
+      warning.textContent = "⚠️ Please complete at least one pin before proceeding.";
+      document.body.appendChild(warning);
+
+      // Auto-hide after 3 seconds
+      setTimeout(() => {
+        warning.remove();
+      }, 3000);
+    }
+    return; // ⛔ Stop navigation
+  }
+
+  // ✅ Continue with navigation if at least one answered
   const selectedPages = JSON.parse(localStorage.getItem("selectedPages") || "[]");
   let currentIndex = parseInt(localStorage.getItem("currentPageIndex") || "0", 10);
 
@@ -993,6 +1026,7 @@ document.getElementById("nextBtn").addEventListener("click", () => {
     window.location.href = thankUrl;
   }
 });
+
 document.querySelector('.fa-search-plus').addEventListener('click', () => {
   zoom = Math.min(3, zoom + 0.1);
   zoomSlider.value = zoom;
@@ -1005,6 +1039,31 @@ document.querySelector('.fa-search-minus').addEventListener('click', () => {
   setTransform();
 });
 
+document.querySelectorAll('.pin').forEach(pin => {
+  const popup = pin.querySelector('.popup');
+  let hideTimeout;
+
+  // When the user hovers over the pin → show popup immediately
+  pin.addEventListener('mouseenter', () => {
+    clearTimeout(hideTimeout);
+    popup.classList.add('visible'); // Ensures it stays visible
+  });
+
+  // When hovering inside the popup → keep it visible
+  popup.addEventListener('mouseenter', () => {
+    clearTimeout(hideTimeout);
+    popup.classList.add('visible');
+  });
+
+  // When leaving pin → delay hiding
+  pin.addEventListener('mouseleave', () => {
+    hideTimeout = setTimeout(() => {
+      popup.classList.remove('visible');
+    }, 200); // ⏳ adjust delay (400ms recommended)
+  });
+
+
+});
 
 
 </script>
