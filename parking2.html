@@ -143,6 +143,17 @@
   </div>
 </div>
 <script>
+  // --- Automatically tag all pins with the current page name ---
+document.addEventListener("DOMContentLoaded", () => {
+  // Derive page name from filename, e.g. "parking2.html" → "parking2"
+  const pageName = window.location.pathname.split("/").pop().replace(".html", "");
+
+  // Tag every .pin element with data-page
+  document.querySelectorAll(".pin").forEach(pin => {
+    pin.setAttribute("data-page", pageName);
+  });
+});
+
     document.querySelector("form")?.addEventListener("submit", (e) => {
   e.preventDefault();
   // Inform parent map script if needed
@@ -436,21 +447,41 @@ document.addEventListener("click", () => {
 });
 
 
-function loadAnsweredPins(){
-  const answered=JSON.parse(localStorage.getItem('answeredPins')||'[]');
-  answered.forEach(label=>{
-    const p=document.querySelector(`.pin[data-prefill="${label}"]`);
-    if(p)p.classList.add('answered');
+function loadAnsweredPins() {
+  const all = JSON.parse(localStorage.getItem("answeredPins") || "[]");
+  const currentPage = document.body.getAttribute("data-page") ||
+                      window.location.pathname.split("/").pop().replace(".html", "");
+
+  // Only mark pins from the current page
+  const answered = all.filter(p => p.page === currentPage);
+
+  answered.forEach(item => {
+    const pin = document.querySelector(`.pin[data-prefill="${item.label}"]`);
+    if (pin) pin.classList.add("answered");
   });
 }
-function markPinAnswered(label){
-  if(!label)return;
-  const arr=JSON.parse(localStorage.getItem('answeredPins')||'[]');
-  if(!arr.includes(label))arr.push(label);
-  localStorage.setItem('answeredPins',JSON.stringify(arr));
-  const p=document.querySelector(`.pin[data-prefill="${label}"]`);
-  if(p)p.classList.add('answered');
+
+function markPinAnswered(label) {
+  if (!label) return;
+
+  // derive current page name (e.g. "stairs.html" → "stairs")
+  const page = document.body.getAttribute("data-page") ||
+               window.location.pathname.split("/").pop().replace(".html", "");
+
+  const arr = JSON.parse(localStorage.getItem("answeredPins") || "[]");
+
+  // check if this label+page combo already exists
+  const exists = arr.some(item => item.label === label && item.page === page);
+
+  if (!exists) arr.push({ label, page });
+
+  localStorage.setItem("answeredPins", JSON.stringify(arr));
+
+  // visually mark pin as answered
+  const p = document.querySelector(`.pin[data-prefill="${label}"]`);
+  if (p) p.classList.add("answered");
 }
+
 loadAnsweredPins();
 
 closeForm.addEventListener('click', () => {
@@ -475,37 +506,37 @@ formModal.addEventListener('click',ev=>{if(ev.target===formModal)closeForm.click
 // --- Navigation between selected pages ---
 document.getElementById("nextBtn").addEventListener("click", () => {
   // Load answered pin data from localStorage
-  const answeredPins = JSON.parse(localStorage.getItem("answeredPins") || "[]");
+  const allPins = JSON.parse(localStorage.getItem("answeredPins") || "[]");
+const currentPage = document.body.getAttribute("data-page") || 
+                    window.location.pathname.split("/").pop().replace(".html","");
+
+// Filter only answers from this page
+const answeredPins = allPins.filter(p => p.page === currentPage);
 
   // ✅ If none answered, block navigation
   if (answeredPins.length === 0) {
-    // If warning doesn’t exist, create one dynamically
-    let warning = document.getElementById("nextWarning");
-    if (!warning) {
-      warning = document.createElement("div");
-      warning.id = "nextWarning";
-      warning.style.position = "fixed";
-      warning.style.bottom = "20px";
-      warning.style.left = "50%";
-      warning.style.transform = "translateX(-50%)";
-      warning.style.background = "rgba(255, 0, 0, 0.9)";
-      warning.style.color = "white";
-      warning.style.padding = "12px 18px";
-      warning.style.borderRadius = "8px";
-      warning.style.fontSize = "16px";
-      warning.style.boxShadow = "0 2px 10px rgba(0,0,0,0.3)";
-      warning.style.zIndex = "9999";
-      warning.style.textAlign = "center";
-      warning.textContent = "⚠️ Please complete at least one pin before proceeding.";
-      document.body.appendChild(warning);
-
-      // Auto-hide after 3 seconds
-      setTimeout(() => {
-        warning.remove();
-      }, 3000);
-    }
-    return; // ⛔ Stop navigation
+  let warning = document.getElementById("nextWarning");
+  if (!warning) {
+    warning = document.createElement("div");
+    warning.id = "nextWarning";
+    warning.style.position = "fixed";
+    warning.style.bottom = "20px";
+    warning.style.left = "50%";
+    warning.style.transform = "translateX(-50%)";
+    warning.style.background = "rgba(255, 0, 0, 0.9)";
+    warning.style.color = "white";
+    warning.style.padding = "12px 18px";
+    warning.style.borderRadius = "8px";
+    warning.style.fontSize = "16px";
+    warning.style.boxShadow = "0 2px 10px rgba(0,0,0,0.3)";
+    warning.style.zIndex = "9999";
+    warning.style.textAlign = "center";
+    warning.textContent = "⚠️ Please complete at least one pin before proceeding.";
+    document.body.appendChild(warning);
+    setTimeout(() => warning.remove(), 3000);
   }
+  return;
+}
 
   // ✅ Continue with navigation if at least one answered
   const selectedPages = JSON.parse(localStorage.getItem("selectedPages") || "[]");
