@@ -29,8 +29,7 @@ body.modal-open {
 }
 
  *{box-sizing:border-box;font-family:"Poppins",sans-serif}
-  html,body{height:100%;margin:0;background:#87ceeb;overflow:hidden}
-/* --- Floating Instruction Bubble (Always Visible + Responsive) --- */
+
 .popup-gallery {
   display: flex;
   gap: 6px;
@@ -502,3 +501,4 @@ body.modal-open {
   visibility: visible;
   pointer-events: auto;
 }
+
