@@ -375,7 +375,7 @@
 </div>
 
 <label>Others:</label>
-
+</div>
 <input type="text" class="others" data-entry="entry.1024216442" placeholder="Please specify"><br><br>
 <!-- Question 23: Approximately how long did you stay in this place? -->
 <label>Approximately how long did you stay in this place?</label><br>
@@ -547,100 +547,7 @@
 </div>
 <br>
   </div>
-  <div class="form-section">
-   
-    <h3 class="text-title">  Fan Satisfaction & Overall Concert Journey</h3>
-   <div class="section-header-text">
-          <h2 class="section-title"> Fan Satisfaction on the Threshold Spaces </h2>
-          <p class="section-description">Instruction: Rate your overall satisfaction of the overall threshold spaces from 1-5 (1 = strongly disagree to 5 = strongly agree)
-</p>
-      </div>
 
-<!-- Question 39 -->
- <h2 class="section-subtext"> FAN SATISFACTION ON THE THRESHOLD SPACES </h2>
-<label>  I was satisfied with my experience in the threshold spaces overall:</label>
-<div class="options">
-  <input type="radio" name="entry.1216397650" value="1" required> 1
-  <input type="radio" name="entry.1216397650" value="2"> 2
-  <input type="radio" name="entry.1216397650" value="3"> 3
-  <input type="radio" name="entry.1216397650" value="4"> 4
-  <input type="radio" name="entry.1216397650" value="5"> 5
-</div>
-<br>
-
-<!-- Question 40 -->
-<label> I was satisfied with how organized and efficient the spaces were:</label>
-<div class="options">
-  <input type="radio" name="entry.461769262" value="1" required> 1
-  <input type="radio" name="entry.461769262" value="2"> 2
-  <input type="radio" name="entry.461769262" value="3"> 3
-  <input type="radio" name="entry.461769262" value="4"> 4
-  <input type="radio" name="entry.461769262" value="5"> 5
-</div>
-<br>
-
-<!-- Question 41 -->
-<label> The threshold spaces positively shaped my anticipation before the concert began:</label>
-<div class="options">
-  <input type="radio" name="entry.193784683" value="1" required> 1
-  <input type="radio" name="entry.193784683" value="2"> 2
-  <input type="radio" name="entry.193784683" value="3"> 3
-  <input type="radio" name="entry.193784683" value="4"> 4
-  <input type="radio" name="entry.193784683" value="5"> 5
-</div>
-<br>
-
-<!-- Question 42 -->
-<label> The design of the spaces made the waiting time more bearable and memorable:</label>
-<div class="options">
-  <input type="radio" name="entry.743679821" value="1" required> 1
-  <input type="radio" name="entry.743679821" value="2"> 2
-  <input type="radio" name="entry.743679821" value="3"> 3
-  <input type="radio" name="entry.743679821" value="4"> 4
-  <input type="radio" name="entry.743679821" value="5"> 5
-</div>
-<br>
- <h2 class="section-subtext"> FAN SATISFACTION ON THE OVERALL CONCERT JOURNEY </h2>
-<!-- Question 43 -->
-<label> Overall pre-event experience:</label>
-<div class="options">
-  <input type="radio" name="entry.249220816" value="1" required> 1
-  <input type="radio" name="entry.249220816" value="2"> 2
-  <input type="radio" name="entry.249220816" value="3"> 3
-  <input type="radio" name="entry.249220816" value="4"> 4
-  <input type="radio" name="entry.249220816" value="5"> 5
-</div>
-<br>
-
-<!-- Question 44 -->
-<label>  Overall concert experience:</label>
-<div class="options">
-  <input type="radio" name="entry.1557505137" value="1" required> 1
-  <input type="radio" name="entry.1557505137" value="2"> 2
-  <input type="radio" name="entry.1557505137" value="3"> 3
-  <input type="radio" name="entry.1557505137" value="4"> 4
-  <input type="radio" name="entry.1557505137" value="5"> 5
-</div>
-<br><br>
-
-<!-- Question 45 -->
-<label> Likelihood to attend another concert at this venue:</label>
-<div class="options">
-  <input type="radio" name="entry.342652466" value="1" required> 1
-  <input type="radio" name="entry.342652466" value="2"> 2
-  <input type="radio" name="entry.342652466" value="3"> 3
-  <input type="radio" name="entry.342652466" value="4"> 4
-  <input type="radio" name="entry.342652466" value="5"> 5
-</div>
-<br>
-</div>
-
-<!-- Question 46 -->
- <br> 
-<label for="q46">  What was the most memorable or enjoyable part of the pre-event experience for you?</label><br>
-<textarea name="entry.1907773432" id="q46" rows="4" placeholder="Type your answer here..." required></textarea>
-<br>
-</div>
 
         <button type="submit">Submit</button>
 
@@ -665,6 +572,17 @@
   </div>
 </div>
 <script>
+  // --- Automatically tag all pins with the current page name ---
+document.addEventListener("DOMContentLoaded", () => {
+  // Derive page name from filename, e.g. "parking2.html" → "parking2"
+  const pageName = window.location.pathname.split("/").pop().replace(".html", "");
+
+  // Tag every .pin element with data-page
+  document.querySelectorAll(".pin").forEach(pin => {
+    pin.setAttribute("data-page", pageName);
+  });
+});
+
     document.querySelector("form")?.addEventListener("submit", (e) => {
   e.preventDefault();
   // Inform parent map script if needed
@@ -885,12 +803,25 @@ const popupImg = document.getElementById("popupImg");
 const closePopupBtn = imagePopup.querySelector(".close-popup");
 
 // When clicking the slideshow image
+
+    pin.dataset.activePin = "true";
+  });
+});
+
+// slideshow controls
+
+// --- Fullscreen image popup (moved outside answer-btn listener) ---
+const imagePopup = document.getElementById("imagePopup");
+const popupImg = document.getElementById("popupImg");
+const closePopupBtn = imagePopup.querySelector(".close-popup");
+
+// Clicking the slideshow image opens fullscreen
 previewImg.addEventListener("click", () => {
   popupImg.src = previewImg.src;
   imagePopup.classList.add("active");
 });
 
-// Close popup on button click or background click
+// Close popup when clicking the X button or background
 closePopupBtn.addEventListener("click", () => {
   imagePopup.classList.remove("active");
 });
@@ -900,12 +831,6 @@ imagePopup.addEventListener("click", (e) => {
     imagePopup.classList.remove("active");
   }
 });
-    pin.dataset.activePin = "true";
-  });
-});
-
-// slideshow controls
-
 
 // Close preview modal
 document.getElementById("closePreview").addEventListener("click", () => {
@@ -951,21 +876,41 @@ document.addEventListener("click", () => {
 });
 
 
-function loadAnsweredPins(){
-  const answered=JSON.parse(localStorage.getItem('answeredPins')||'[]');
-  answered.forEach(label=>{
-    const p=document.querySelector(`.pin[data-prefill="${label}"]`);
-    if(p)p.classList.add('answered');
+function loadAnsweredPins() {
+  const all = JSON.parse(localStorage.getItem("answeredPins") || "[]");
+  const currentPage = document.body.getAttribute("data-page") ||
+                      window.location.pathname.split("/").pop().replace(".html", "");
+
+  // Only mark pins from the current page
+  const answered = all.filter(p => p.page === currentPage);
+
+  answered.forEach(item => {
+    const pin = document.querySelector(`.pin[data-prefill="${item.label}"]`);
+    if (pin) pin.classList.add("answered");
   });
 }
-function markPinAnswered(label){
-  if(!label)return;
-  const arr=JSON.parse(localStorage.getItem('answeredPins')||'[]');
-  if(!arr.includes(label))arr.push(label);
-  localStorage.setItem('answeredPins',JSON.stringify(arr));
-  const p=document.querySelector(`.pin[data-prefill="${label}"]`);
-  if(p)p.classList.add('answered');
+
+function markPinAnswered(label) {
+  if (!label) return;
+
+  // derive current page name (e.g. "stairs.html" → "stairs")
+  const page = document.body.getAttribute("data-page") ||
+               window.location.pathname.split("/").pop().replace(".html", "");
+
+  const arr = JSON.parse(localStorage.getItem("answeredPins") || "[]");
+
+  // check if this label+page combo already exists
+  const exists = arr.some(item => item.label === label && item.page === page);
+
+  if (!exists) arr.push({ label, page });
+
+  localStorage.setItem("answeredPins", JSON.stringify(arr));
+
+  // visually mark pin as answered
+  const p = document.querySelector(`.pin[data-prefill="${label}"]`);
+  if (p) p.classList.add("answered");
 }
+
 loadAnsweredPins();
 
 closeForm.addEventListener('click', () => {
@@ -990,37 +935,37 @@ formModal.addEventListener('click',ev=>{if(ev.target===formModal)closeForm.click
 // --- Navigation between selected pages ---
 document.getElementById("nextBtn").addEventListener("click", () => {
   // Load answered pin data from localStorage
-  const answeredPins = JSON.parse(localStorage.getItem("answeredPins") || "[]");
+  const allPins = JSON.parse(localStorage.getItem("answeredPins") || "[]");
+const currentPage = document.body.getAttribute("data-page") || 
+                    window.location.pathname.split("/").pop().replace(".html","");
+
+// Filter only answers from this page
+const answeredPins = allPins.filter(p => p.page === currentPage);
 
   // ✅ If none answered, block navigation
   if (answeredPins.length === 0) {
-    // If warning doesn’t exist, create one dynamically
-    let warning = document.getElementById("nextWarning");
-    if (!warning) {
-      warning = document.createElement("div");
-      warning.id = "nextWarning";
-      warning.style.position = "fixed";
-      warning.style.bottom = "20px";
-      warning.style.left = "50%";
-      warning.style.transform = "translateX(-50%)";
-      warning.style.background = "rgba(255, 0, 0, 0.9)";
-      warning.style.color = "white";
-      warning.style.padding = "12px 18px";
-      warning.style.borderRadius = "8px";
-      warning.style.fontSize = "16px";
-      warning.style.boxShadow = "0 2px 10px rgba(0,0,0,0.3)";
-      warning.style.zIndex = "9999";
-      warning.style.textAlign = "center";
-      warning.textContent = "⚠️ Please complete at least one pin before proceeding.";
-      document.body.appendChild(warning);
-
-      // Auto-hide after 3 seconds
-      setTimeout(() => {
-        warning.remove();
-      }, 3000);
-    }
-    return; // ⛔ Stop navigation
+  let warning = document.getElementById("nextWarning");
+  if (!warning) {
+    warning = document.createElement("div");
+    warning.id = "nextWarning";
+    warning.style.position = "fixed";
+    warning.style.bottom = "20px";
+    warning.style.left = "50%";
+    warning.style.transform = "translateX(-50%)";
+    warning.style.background = "rgba(255, 0, 0, 0.9)";
+    warning.style.color = "white";
+    warning.style.padding = "12px 18px";
+    warning.style.borderRadius = "8px";
+    warning.style.fontSize = "16px";
+    warning.style.boxShadow = "0 2px 10px rgba(0,0,0,0.3)";
+    warning.style.zIndex = "9999";
+    warning.style.textAlign = "center";
+    warning.textContent = "⚠️ Please complete at least one pin before proceeding.";
+    document.body.appendChild(warning);
+    setTimeout(() => warning.remove(), 3000);
   }
+  return;
+}
 
   // ✅ Continue with navigation if at least one answered
   const selectedPages = JSON.parse(localStorage.getItem("selectedPages") || "[]");

@@ -1,159 +1,253 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Thank You</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fan Satisfaction & Overall Concert Journey</title>
+  <link rel="stylesheet" href="survey.css" />
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f7fb;
+      color: #333;
+      overflow-y: auto; /* Single scroll */
+    }
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+    .form-content {
+      max-width: 800px;
+      margin: 40px auto;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      padding: 30px 40px;
+    }
 
-<style>
-  * { box-sizing: border-box; }
+    .form-title {
+      font-size: 1.8rem;
+      text-align: center;
+      margin-bottom: 20px;
+      color: #004aad;
+    }
 
-  body {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 2rem 1rem;
-    margin: 0;
-    background-color: #f0f4f8;
-    font-family: 'Poppins', sans-serif;
-    line-height: 1.6;
-  }
+    .section-header-text {
+      margin-bottom: 20px;
+    }
 
-  .thankyou-box {
-    width: 100%;
-    max-width: 480px;
-    text-align: center;
-    padding: 2.5rem 2rem;
-    border-radius: 1rem;
-    background: white;
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 0 10px 0 rgba(0, 0, 0, 0.04);
-    margin-top: auto;
-    margin-bottom: auto;
-  }
+    .section-title {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      color: #222;
+    }
 
-  .thankyou-box h1 {
-    font-size: 1.75rem;
-    color: #0b0357;
-    margin-bottom: 0.5rem;
-  }
+    .section-description {
+      font-size: 0.95rem;
+      color: #555;
+    }
 
-  .thankyou-box p {
-    font-size: 1rem;
-    color: #4b5563;
-    margin-bottom: 1rem;
-  }
+    label {
+      font-weight: 500;
+      display: block;
+      margin-bottom: 6px;
+    }
 
-  form { width: 100%; margin-top: 1rem; }
+    .options {
+      display: flex;
+      justify-content: flex-start;
+      gap: 25px; /* Bigger space between radio buttons */
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
 
-  label {
-    display: block;
-    text-align: left;
-    margin-bottom: 0.375rem;
-    font-size: 0.875rem;
-    font-weight: 600;
-    color: #374151;
-  }
+    .options label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #f8f9fc;
+      padding: 6px 12px;
+      border-radius: 6px;
+      transition: background 0.2s ease;
+      cursor: pointer;
+    }
 
-  input[type="text"] {
-    width: 100%;
-    padding: 0.75rem;
-    border-radius: 0.5rem;
-    border: 1px solid #d1d5db;
-    font-size: 1rem;
-    transition: border-color 0.2s, box-shadow 0.2s;
-  }
+    .options label:hover {
+      background: #eaf1ff;
+    }
 
-  input[type="text"]:focus {
-    outline: none;
-    border-color: #3b82f6;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
-  }
+    .options input[type="radio"] {
+      transform: scale(1.2);
+      cursor: pointer;
+    }
 
-  button {
-    margin-top: 1.5rem;
-    padding: 0.75rem 1.25rem;
-    border-radius: 0.5rem;
-    font-size: 1rem;
-    font-weight: 600;
-    border: none;
-    background: #3b82f6;
-    color: white;
-    cursor: pointer;
-    width: 100%;
-    transition: background-color 0.2s, transform 0.1s;
-  }
+    .section-subtext {
+      margin-top: 30px;
+      margin-bottom: 10px;
+      color: #004aad;
+      font-size: 1.1rem;
+      text-transform: uppercase;
+    }
 
-  button:hover { background: #2563eb; }
-  button:active { transform: scale(0.99); }
+    .submit-btn {
+      display: block;
+      width: 100%;
+      background: #004aad;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 12px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      margin-top: 20px;
+    }
 
-  @media (max-width: 600px) {
-    body { padding: 1rem 0.5rem; }
-    .thankyou-box { padding: 1.5rem; }
-    .thankyou-box h1 { font-size: 1.5rem; }
-    .thankyou-box p { font-size: 0.9rem; }
-  }
-</style>
+    .submit-btn:hover {
+      background: #0066ff;
+    }
+  </style>
 </head>
+
 <body>
+  <!-- Add this inside your form, preferably near the top -->
 
-<div class="thankyou-box">
-  <h1>Survey Completed!</h1>
-  <p>You are now an official candidate for this raffle.</p>
-  <p class="section-title">Please enter your Facebook link/email. </p>
+  <div class="form-content">
+    <h2 id="section-title" class="form-title">Congratulations! You've rated all the spaces.</h2>
 
-  <!-- ✅ UPDATED FORM (hidden iframe submission) -->
-  <form id="submitForm"
-        action="https://docs.google.com/forms/d/e/1FAIpQLSfm3hvexjSWoNOPjyRDeeY-bXE3fJsDgEJmpekj0udfwHXBrA/formResponse"
-        method="POST"
-        target="hidden_iframe"
-        onsubmit="submitted = true;">
+    <form id="concertForm"
+          action="https://docs.google.com/forms/d/e/1FAIpQLSfaf9REWox43riA2QvPLCoWpGhLcIqSMkL5vc5FbbcZTxHAYg/formResponse"
+          method="POST"
+          target="_self"
+          accept-charset="UTF-8"
+          autocomplete="on">
 
-    <input type="hidden" name="entry.281574769" id="userIdField">
+      <div class="form-section">
 
-    <label for="facebookLink">Facebook Profile Link</label>
-    <input type="text"
-           name="entry.51650144"
-           id="facebookLink"
-           placeholder="https://facebook.com/yourprofile"
-           required>
+        <div class="section-header-text">
+          <h2 class="section-title">Fan Satisfaction on the Threshold Spaces</h2>
+          <p class="section-description">
+            This is the LAST survey set! Thank you for rating each space.  
+            Please rate your overall satisfaction of the threshold spaces from 1–5  
+            (1 = strongly disagree to 5 = strongly agree)
+          </p>
+        </div>
+        <input type="hidden" name="entry.1098192972" id="userIdField">
 
-    <button type="submit">Submit Raffle Entry</button>
 
-  </form>
+        <h2 class="section-subtext">FAN SATISFACTION ON THE THRESHOLD SPACES</h2>
+
+
+        <!-- Question 39 -->
+        <label>I was satisfied with my experience in the threshold spaces overall:</label>
+        <div class="options" aria-label="Q39">
+          <label><input type="radio" name="entry.1216397650" value="1" required>1</label>
+          <label><input type="radio" name="entry.1216397650" value="2">2</label>
+          <label><input type="radio" name="entry.1216397650" value="3">3</label>
+          <label><input type="radio" name="entry.1216397650" value="4">4</label>
+          <label><input type="radio" name="entry.1216397650" value="5">5</label>
+        </div>
+
+        <!-- Question 40 -->
+        <label>I was satisfied with how organized and efficient the spaces were:</label>
+        <div class="options" aria-label="Q40">
+          <label><input type="radio" name="entry.461769262" value="1" required>1</label>
+          <label><input type="radio" name="entry.461769262" value="2">2</label>
+          <label><input type="radio" name="entry.461769262" value="3">3</label>
+          <label><input type="radio" name="entry.461769262" value="4">4</label>
+          <label><input type="radio" name="entry.461769262" value="5">5</label>
+        </div>
+
+        <!-- Question 41 -->
+        <label>The threshold spaces positively shaped my anticipation before the concert began:</label>
+        <div class="options">
+          <label><input type="radio" name="entry.193784683" value="1" required>1</label>
+          <label><input type="radio" name="entry.193784683" value="2">2</label>
+          <label><input type="radio" name="entry.193784683" value="3">3</label>
+          <label><input type="radio" name="entry.193784683" value="4">4</label>
+          <label><input type="radio" name="entry.193784683" value="5">5</label>
+        </div>
+
+        <!-- Question 42 -->
+        <label>The design of the spaces made the waiting time more bearable and memorable:</label>
+        <div class="options">
+          <label><input type="radio" name="entry.743679821" value="1" required>1</label>
+          <label><input type="radio" name="entry.743679821" value="2">2</label>
+          <label><input type="radio" name="entry.743679821" value="3">3</label>
+          <label><input type="radio" name="entry.743679821" value="4">4</label>
+          <label><input type="radio" name="entry.743679821" value="5">5</label>
+        </div>
+
+        <h2 class="section-subtext">FAN SATISFACTION ON THE OVERALL CONCERT JOURNEY</h2>
+
+        <!-- Question 43 -->
+        <label>Overall pre-event experience:</label>
+        <div class="options">
+          <label><input type="radio" name="entry.249220816" value="1" required>1</label>
+          <label><input type="radio" name="entry.249220816" value="2">2</label>
+          <label><input type="radio" name="entry.249220816" value="3">3</label>
+          <label><input type="radio" name="entry.249220816" value="4">4</label>
+          <label><input type="radio" name="entry.249220816" value="5">5</label>
+        </div>
+
+        <!-- Question 44 -->
+        <label>Overall concert experience:</label>
+        <div class="options">
+          <label><input type="radio" name="entry.1557505137" value="1" required>1</label>
+          <label><input type="radio" name="entry.1557505137" value="2">2</label>
+          <label><input type="radio" name="entry.1557505137" value="3">3</label>
+          <label><input type="radio" name="entry.1557505137" value="4">4</label>
+          <label><input type="radio" name="entry.1557505137" value="5">5</label>
+        </div>
+
+        <!-- Question 45 -->
+        <label>Likelihood to attend another concert at this venue:</label>
+        <div class="options">
+          <label><input type="radio" name="entry.342652466" value="1" required>1</label>
+          <label><input type="radio" name="entry.342652466" value="2">2</label>
+          <label><input type="radio" name="entry.342652466" value="3">3</label>
+          <label><input type="radio" name="entry.342652466" value="4">4</label>
+          <label><input type="radio" name="entry.342652466" value="5">5</label>
+        </div>
+        
+<!-- Question 46 -->
+ <br> 
+<label for="q46">  What was the most memorable or enjoyable part of the pre-event experience for you?</label><br>
+<textarea name="entry.1907773432" id="q46" rows="4" placeholder="Type your answer here..." required></textarea>
+<br>
 </div>
 
-<!-- ✅ Hidden iframe to block Google redirect -->
-<iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
 
+        <button type="submit" class="submit-btn">Submit</button>
+      </div>
+    </form>
+  </div>
 
-<script>
-// Prefill user ID from URL (?userId=xxxx)
-function setupPage() {
-    const params = new URLSearchParams(window.location.search);
-    const userId = params.get("userId") || "";
-    const userIdField = document.getElementById("userIdField");
-    if (userIdField) userIdField.value = userId;
+  <script>
+document.addEventListener("DOMContentLoaded", () => {
+  // Populate userId from URL
+  const params = new URLSearchParams(window.location.search);
+  const userId = params.get("userId") || "";
+  document.getElementById("userIdField").value = userId;
 
-    try {
-        localStorage.removeItem("answeredPins");
-        localStorage.removeItem("selectedPages");
-        localStorage.removeItem("currentPageIndex");
-    } catch (e) {}
-}
-document.addEventListener('DOMContentLoaded', setupPage);
+  const form = document.getElementById("concertForm");
 
-// ✅ Redirect to thankyou2.html after Google Form submission finishes
-let submitted = false;
-document.getElementById("hidden_iframe").addEventListener("load", function () {
-  if (submitted) {
-    window.location.href = "thankyou2.html";
-  }
+  form.addEventListener("submit", function(e) {
+    e.preventDefault(); // Prevent the default form submission
+
+    const formData = new FormData(form);
+
+    // Submit to Google Forms
+    fetch(form.action, {
+      method: "POST",
+      mode: "no-cors",
+      body: formData
+    }).then(() => {
+      // Redirect after submission
+      window.location.href = "thankyou3.html";
+    }).catch((err) => {
+      console.error("Submission failed", err);
+      alert("Sorry, there was a problem submitting your response.");
+    });
+  });
 });
 </script>
-
-</body>
-</html>
