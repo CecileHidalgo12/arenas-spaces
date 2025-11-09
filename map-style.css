@@ -1,23 +1,84 @@
-
- /* ✅ Allows page to scroll only when needed */
+/* Footer container */
 .top-container {
   width: 100%;
   display: flex;
-  justify-content: flex-end; /* moves button to the right */
-  padding: 10px;
-  position: fixed; /* stays at top */
+  justify-content: space-between; /* left, center, right */
+  align-items: center;
+  padding: 12px 20px;
+  position: fixed;
   bottom: 0;
   left: 0;
-  background: white; /* optional */
+  background: #014c50; /* gradient or solid like your cards/modal */
+  background: linear-gradient(135deg, #02929A, #014c50);
+  border-radius: 12px 12px 0 0; /* rounded top corners */
+  box-shadow: 0 -4px 12px rgba(0,0,0,0.25);
   z-index: 9999;
+  color: #fff;
+  font-family: "Lexend", sans-serif;
+  flex-wrap: wrap;
 }
 
+/* Center title */
+.top-title {
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+  flex: 1;               /* takes remaining space between left/right */
+}
+
+/* Next button */
 .next-btn {
   padding: 8px 16px;
-  border-radius: 6px;
+  border-radius: 8px;
   border: none;
   cursor: pointer;
+  font-weight: 500;
+  background-color: hsl(0, 0%, 100%);
+  color: #002048;
+  transition: background-color 0.2s;
 }
+
+.next-btn:hover {
+  background-color: #02929A;
+}
+
+/* Zoom controls */
+.zoom-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Slider styling */
+
+
+/* Mobile responsiveness */
+@media (max-width: 600px) {
+  .top-container {
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px 15px;
+  }
+
+  .top-title {
+    font-size: 16px;
+  }
+
+  .next-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .zoom-controls {
+    width: 100%;
+    justify-content: center;
+  }
+
+  #zoomSlider {
+    width: 80%;
+  }
+}
+
 
  html, body {
   overflow: auto;
@@ -501,4 +562,5 @@ body.modal-open {
   visibility: visible;
   pointer-events: auto;
 }
+
 
