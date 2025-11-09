@@ -9,7 +9,8 @@
 <link rel="stylesheet" href="survey.css" />
 </head>
 <body>
-<div class="top-container">
+
+  <div class="top-container">
   
      <div class="top-title">                         </div>
     <div class="zoom-controls">
@@ -22,13 +23,16 @@
   
     <button id="nextBtn" class="next-btn">Next</button>
   </div>
-  
-  
- 
+   <div class="info-bubble2">  ℹ️YOU ARE EVALUATING SPACE</div>
 
+<!-- Floating Instruction Bubble -->
+<!-- <div class="info-bubble">
+  <i class="fa fa-info-circle"></i>
+  <span>Click on the Spaces You've Encountered</span>
+</div>
+--> 
 <div id="mapContainer" class="map-container">
   <div id="mapInner" class="map-inner">
-    <div class="info-bubble2">  ℹ️YOU ARE EVALUATING SPACE</div>
  <div class="pin" data-x="2300" data-y="1105" data-prefill="[EXTERIOR] Stairs - Left Side Stairs" 
        data-images='["exterior-pics/leftstair1.jpg","exterior-pics/leftstair2.jpg"]'>
       <div class="popup">
@@ -75,7 +79,6 @@
 </div> <!-- end of mapContainer -->
 
 <!-- ✅ Zoom controls moved outside the map container -->
-
 
 <!-- FIRST POPUP: PREVIEW IMAGE & PROCEED -->
 <div id="previewModal" class="preview-modal">
@@ -1008,4 +1011,3 @@ document.body.classList.remove("modal-open");
 </script>
 </body>
 </html>
-
