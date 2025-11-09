@@ -9,10 +9,20 @@
 <link rel="stylesheet" href="survey.css" />
 </head>
 <body>
-<header>
-  MERCH BOOTH
-  <button id="nextBtn" class="next-btn">Next <i class="fa fa-arrow-right"></i></button>
-</header>
+<div class="top-container">
+  
+     <div class="top-title">                         </div>
+    <div class="zoom-controls">
+  <i class="fa fa-search-minus"></i>
+  
+  <input id="zoomSlider" type="range" min="1" max="3" step="0.1" value="1"/>
+  <i class="fa fa-search-plus"></i>
+
+</div>
+  
+    <button id="nextBtn" class="next-btn">Next</button>
+  </div>
+   <div class="info-bubble2">  ℹ️YOU ARE EVALUATING MERCH BOOTHS</div>
 
 <!-- Floating Instruction Bubble -->
 <!-- <div class="info-bubble">
@@ -44,11 +54,6 @@
 </div> <!-- end of mapContainer -->
 
 <!-- ✅ Zoom controls moved outside the map container -->
-<div class="zoom-controls">
-  <i class="fa fa-search-minus"></i>
-  <input id="zoomSlider" type="range" min="1" max="3" step="0.1" value="1"/>
-  <i class="fa fa-search-plus"></i>
-</div>
 
 <!-- FIRST POPUP: PREVIEW IMAGE & PROCEED -->
 <div id="previewModal" class="preview-modal">
