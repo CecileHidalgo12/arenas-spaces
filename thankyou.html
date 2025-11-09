@@ -243,7 +243,7 @@ document.addEventListener("DOMContentLoaded", () => {
       body: formData
     }).then(() => {
       // Redirect after submission
-      window.location.href = "thankyou3.html";
+      window.location.href = "thankyou3.html?userId=" + encodeURIComponent(userId);
     }).catch((err) => {
       console.error("Submission failed", err);
       alert("Sorry, there was a problem submitting your response.");
@@ -251,3 +251,4 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 </script>
+
