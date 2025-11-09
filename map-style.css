@@ -1,4 +1,14 @@
 
+ /* ✅ Allows page to scroll only when needed */
+html, body {
+  overflow: auto;
+}
+
+/* Only lock scrolling when modal is open */
+body.modal-open {
+  overflow: hidden;
+}
+
  *{box-sizing:border-box;font-family:"Poppins",sans-serif}
   html,body{height:100%;margin:0;background:#87ceeb;overflow:hidden}
 /* --- Floating Instruction Bubble (Always Visible + Responsive) --- */
@@ -213,12 +223,25 @@
   font-size: clamp(14px, 3vw, 22px); /* icon scales based on screen width */
 }
 
-  header{
-    position:fixed;top:0;left:0;width:100%;height:60px;
-    background:linear-gradient(to right,#0288d1,#4fc3f7);
-    display:flex;align-items:center;justify-content:center;color:#fff;
-    font-size:20px;font-weight:600;z-index:120;box-shadow:0 2px 5px rgba(0,0,0,.2)
-  }
+/* ✅ ALWAYS KEEP HEADER ON TOP (fixed even when map zooms) */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background: linear-gradient(to right, #0288d1, #4fc3f7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 600;
+
+  z-index: 999999999 !important; /* 🔥 higher than ANY popup, map, or modal */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, .2);
+}
+
   .toggle-btn{position:absolute;left:20px;background:#fff;color:#0288d1;border:0;border-radius:50%;width:42px;height:42px;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 2px 4px rgba(0,0,0,.2)}
   .next-btn{position:absolute;right:20px;background:#fff;color:#0288d1;border:0;border-radius:20px;padding:8px 14px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px;box-shadow:0 2px 4px rgba(0,0,0,.2)}
 
@@ -248,6 +271,13 @@
     z-index:1000;
     background-size: 100% 100% !important; /* force the image to scale */
   }
+/* ✅ Prevent zoom transform from breaking fixed header on mobile */
+.map-container,
+.map-inner {
+  transform-style: flat !important;
+  will-change: transform;
+  overflow: visible !important;  /* ensures header isn't clipped */
+}
 
   .map-inner:before{
     content:"";display:block;padding-top:calc(2480/3509*100%);width:100%;height:0;visibility:hidden
