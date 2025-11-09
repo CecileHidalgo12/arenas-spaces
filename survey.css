@@ -574,6 +574,9 @@ textarea {
   margin-left: auto;
   margin-right: auto;
 }
+
+/* ====== Warning and animation for Next button ====== */
+/* Make all radio buttons bigger */
 .options input[type="radio"],
 .options2 input[type="radio"] {
   transform: scale(1.8);  /* adjust the number to make it bigger or smaller */
