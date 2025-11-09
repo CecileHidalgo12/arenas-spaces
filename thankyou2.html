@@ -25,25 +25,25 @@
   }
 
   .check-icon {
-    width: 85px;          /* smaller */
+    width: 85px;
     height: 85px;
     background: white;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 0.6rem; /* reduced spacing */
+    margin-bottom: 0.6rem;
   }
 
   .check-icon svg {
-    width: 42px;           /* reduced icon */
+    width: 42px;
     height: 42px;
     fill: #1E90FF;
   }
 
   h1 {
     margin: 0;
-    font-size: 1.4rem;     /* smaller title */
+    font-size: 1.4rem;
     font-weight: 700;
   }
 
@@ -53,7 +53,7 @@
     margin: 0.5rem auto;
     max-width: 250px;
     font-weight: 400;
-    line-height: 1.2;      /* tighter line spacing */
+    line-height: 1.2;
   }
 
   .userid-box {
@@ -71,7 +71,7 @@
 
   .primary-btn,
   .outline-btn {
-    width: 75%;            /* smaller width */
+    width: 75%;
     padding: 0.6rem 1.2rem;
     font-size: 0.9rem;
     border-radius: 20px;
@@ -94,7 +94,6 @@
   }
 </style>
 
-
 </head>
 <body>
 
@@ -110,7 +109,7 @@
 <p>Thank you for participating!<br>
 We have received your raffle entry.</p>
 
-<p><strong> Screenshot this screen as proof of participation.</strong></p>
+<p><strong>Screenshot this screen as proof of participation.</strong></p>
 
 <!-- User ID Display -->
 <div class="userid-box" id="userIdDisplay">Loading...</div>
@@ -119,14 +118,14 @@ We have received your raffle entry.</p>
   Done
 </button>
 
-
-
 <script>
-  // Display userId from URL (?userId=xxxx)
+  // Safely get and display userId from URL
   const params = new URLSearchParams(window.location.search);
-  const userId = params.get("userId");
-  document.getElementById("userIdDisplay").textContent = userId
-      ? "User ID: " + userId
+  const userId = (params.get("userId") || "").trim();
+  const display = document.getElementById("userIdDisplay");
+
+  display.textContent = userId 
+      ? "User ID: " + userId 
       : "User ID Missing";
 </script>
 
