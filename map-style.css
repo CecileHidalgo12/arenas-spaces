@@ -18,6 +18,7 @@
   border: none;
   cursor: pointer;
 }
+
  html, body {
   overflow: auto;
 }
@@ -332,8 +333,8 @@ body.modal-open {
 /* --- Zoom Slider Controls --- */
 .zoom-controls {
   position: fixed;
-  right: 20px;
-  top: 20px;
+  left: 20px;
+  bottom: 10px;
   background: rgba(255, 255, 255, 0.9);
   padding: 8px 12px;
   border-radius: 20px;
@@ -501,6 +502,3 @@ body.modal-open {
   visibility: visible;
   pointer-events: auto;
 }
-
-
-
