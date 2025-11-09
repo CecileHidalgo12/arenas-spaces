@@ -1,21 +1,75 @@
-/* Footer container */
+.info-bubble2 {
+  position: fixed; /* Fix it to the viewport */
+  left: 10px; /* Space from the left edge */
+  top: 10px;  /* Fixed at the top */
+  padding: 6px 12px; /* Smaller padding for a compact look */
+  background-color: #87ceeb; /* Sky blue background */
+  color: rgb(84, 110, 167); /* Corrected text color */
+  font-weight: bold;
+  font-size: 12px; /* Smaller text size */
+  border-radius: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
+  z-index: 10001;
+  white-space: nowrap; /* Keep text on one line */
+  transition: all 0.3s ease; /* Smooth scaling and position changes */
+  border: 1px solid #4B9CD3; /* Light border for a clean outline */
+  max-width: 90%; /* Prevent it from taking too much space */
+  overflow: hidden; /* Ensure text doesn’t overflow */
+}
+
+/* Tablet screens (up to ~900px) */
+@media (max-width: 900px) {
+  .info-bubble2 {
+    font-size: 11px; /* Slightly smaller font */
+    padding: 5px 10px;
+    left: 8px; /* Slightly closer to edge */
+    max-width: 80%; /* More restricted width for tablets */
+    top: 5%; /* Move it slightly down for tablets */
+  }
+}
+
+/* Mobile screens (up to ~600px) */
+@media (max-width: 600px) {
+  .info-bubble2 {
+    font-size: 10px; /* Smaller font for compact mobile screens */
+    padding: 4px 8px;
+    left: 5px; /* Even closer to edge for mobile screens */
+    max-width: 75%; /* Further restrict bubble size */
+    white-space: normal; /* Allow text to wrap */
+    text-align: left; /* Align text to the left */
+    top: 5%; /* Move it slightly down for mobile screens */
+  }
+}
+
+/* Very small screens (up to ~400px) */
+@media (max-width: 400px) {
+  .info-bubble2 {
+    font-size: 9px; /* Very small font for tiny screens */
+    padding: 3px 6px;
+    left: 3px; /* Very close to the edge */
+    top: 5%; /* Keep it fixed slightly down from the top for small screens */
+    max-width: 70%; /* Limit width even further on very small screens */
+  }
+}
+
+
+
 .top-container {
   width: 100%;
   display: flex;
-  justify-content: space-between; /* left, center, right */
+  justify-content: space-between;
   align-items: center;
   padding: 12px 20px;
   position: fixed;
   bottom: 0;
   left: 0;
-  background: #014c50; /* gradient or solid like your cards/modal */
   background: linear-gradient(135deg, #02929A, #014c50);
-  border-radius: 12px 12px 0 0; /* rounded top corners */
+  border-radius: 12px 12px 0 0;
   box-shadow: 0 -4px 12px rgba(0,0,0,0.25);
   z-index: 9999;
   color: #fff;
   font-family: "Lexend", sans-serif;
-  flex-wrap: wrap;
+  flex-wrap: nowrap; /* ✅ prevent wrapping */
 }
 
 /* Center title */
@@ -23,12 +77,16 @@
   font-size: 18px;
   font-weight: 600;
   text-align: center;
-  flex: 1;               /* takes remaining space between left/right */
+  flex: 1;
+  margin: 0 10px; /* give spacing from left/right */
+  white-space: nowrap; /* prevent breaking title into multiple lines */
+  overflow: hidden;
+  text-overflow: ellipsis; /* adds ... if text is too long */
 }
 
 /* Next button */
 .next-btn {
-  padding: 8px 16px;
+  padding: 8px 12px;
   border-radius: 8px;
   border: none;
   cursor: pointer;
@@ -36,10 +94,12 @@
   background-color: hsl(0, 0%, 100%);
   color: #002048;
   transition: background-color 0.2s;
+
 }
 
 .next-btn:hover {
   background-color: #02929A;
+  color: #fff;
 }
 
 /* Zoom controls */
@@ -47,35 +107,118 @@
   display: flex;
   align-items: center;
   gap: 6px;
+  flex-shrink: 0; /* prevent shrinking */
 }
 
-/* Slider styling */
-
-
-/* Mobile responsiveness */
+/* Mobile tweaks */
 @media (max-width: 600px) {
   .top-container {
-    flex-direction: column;
-    gap: 10px;
-    padding: 10px 15px;
+    padding: 10px 12px;
   }
 
   .top-title {
     font-size: 16px;
   }
 
-  .next-btn {
-    width: 100%;
-    text-align: center;
+  #zoomSlider {
+    width: 80px; /* reduce slider size */
   }
 
-  .zoom-controls {
-    width: 100%;
-    justify-content: center;
+  .next-btn {
+    padding: 6px 10px;
+    font-size: 14px;
+  }
+}
+.top-container2 {
+  width: 90%; /* not full width, gives floating effect */
+  max-width: 600px; /* optional: limit width on large screens */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  position: fixed;
+  bottom: 10px; /* distance from bottom to appear floating */
+  left: 50%; /* center horizontally */
+  transform: translateX(-50%); /* perfect centering */
+  background: linear-gradient(135deg, #02929A, #014c50);
+  border-radius: 16px; /* fully rounded corners */
+  box-shadow: 0 8px 24px rgba(0,0,0,0.35); /* strong shadow for floating */
+  z-index: 9999;
+  color: #fff;
+  font-family: "Lexend", sans-serif;
+  flex-wrap: nowrap;
+}
+
+/* Optional: mobile tweaks */
+@media (max-width: 600px) {
+  .top-container2 {
+    width: 95%;
+    padding: 10px 16px;
+    bottom: 16px;
+  }
+}
+
+
+/* Center title */
+.top-title {
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+  flex: 1;
+  margin: 0 10px; /* give spacing from left/right */
+  white-space: nowrap; /* prevent breaking title into multiple lines */
+  overflow: hidden;
+  text-overflow: ellipsis; /* adds ... if text is too long */
+}
+
+/* Next button */
+.next-btn {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  background-color: hsl(0, 0%, 100%);
+  color: #002048;
+  transition: background-color 0.2s;
+
+}
+
+.next-btn:hover {
+  background-color: #02929A;
+  color: #fff;
+}
+
+/* Zoom controls */
+.zoom-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0; /* prevent shrinking */
+}
+
+/* Mobile tweaks */
+@media (max-width: 600px) {
+  .top-container {
+    padding: 10px 12px;
+  }
+
+  .top-title {
+    font-size: 16px;
   }
 
   #zoomSlider {
-    width: 80%;
+    width: 80px; /* reduce slider size */
+  }
+
+  .next-btn {
+    padding: 6px 10px;
+    font-size: 14px;
+  }
+}
+@media (max-width: 600px) {
+  .top-container2 {
+    bottom: calc(50px); /* adjust based on mobile footer height */
   }
 }
 
