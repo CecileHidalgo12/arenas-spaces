@@ -232,7 +232,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("concertForm");
 
   form.addEventListener("submit", function(e) {
-    e.preventDefault(); // Prevent the default form submission
+    e.preventDefault(); // Prevent default form submission
 
     const formData = new FormData(form);
 
@@ -242,13 +242,13 @@ document.addEventListener("DOMContentLoaded", () => {
       mode: "no-cors",
       body: formData
     }).then(() => {
-      // Redirect after submission
-      window.location.href = "thankyou3.html?userId=" + encodeURIComponent(userId);
+      // Pass userId to thank you page
+      window.location.href = `thankyou3.html?userId=${encodeURIComponent(userId)}`;
     }).catch((err) => {
       console.error("Submission failed", err);
       alert("Sorry, there was a problem submitting your response.");
     });
   });
 });
-</script>
 
+</script>
