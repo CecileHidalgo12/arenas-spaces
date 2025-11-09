@@ -6,7 +6,7 @@
   justify-content: flex-end; /* moves button to the right */
   padding: 10px;
   position: fixed; /* stays at top */
-  top: 0;
+  bottom: 0;
   left: 0;
   background: white; /* optional */
   z-index: 9999;
@@ -501,4 +501,5 @@ body.modal-open {
   visibility: visible;
   pointer-events: auto;
 }
+
 
