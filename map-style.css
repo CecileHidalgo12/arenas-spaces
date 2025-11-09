@@ -269,9 +269,33 @@
   .pin.answered::before{background:#4caf50}
 
   /* popup */
-  .popup{position:absolute;top:50%;right:calc(100% + 8px);transform:translateY(-50%);width:140px;background:#fff;border-radius:10px;box-shadow:0 3px 6px rgba(0,0,0,.2);opacity:0;visibility:hidden;transition:all .28s;color:#333;pointer-events:none;z-index:9999}
+  .popup {
+  position: absolute;
+  top: 50%;
+  right: calc(100% + 8px);
+  transform: translateY(-50%);
+  width: 140px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 3px 6px rgba(0,0,0,.2);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.28s ease, visibility 0.28s ease;
+  color: #333;
+  pointer-events: none;
+  z-index: 9999;
+}
+
   .pin .popup{transform-origin:center right;transform:translateY(-50%) scale(calc(1 / var(--zoom,1)))}
-  .pin:hover .popup,.pin.clicked .popup{opacity:1;visibility:visible;pointer-events:auto}
+ /* ✅ Popup stays visible while hovering either the pin OR the popup */
+.pin:hover .popup,
+.pin .popup:hover,
+.pin.clicked .popup {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
   .popup img{width:100%;height:65px;object-fit:cover}
   .popup-content{padding:6px 8px}
   .popup h3{margin:2px 0 0;font-size:12px;font-weight:600}
@@ -448,3 +472,8 @@
   .preview-desc { font-size: 13px; }
 }
 
+.popup.visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
